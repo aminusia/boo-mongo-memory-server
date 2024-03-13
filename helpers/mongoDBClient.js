@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-function initDBConnection(uri) {
+function initDBConnection (uri) {
   try {
     // initiate mongodb connection
     mongoose.connect(uri)
@@ -11,4 +11,4 @@ function initDBConnection(uri) {
   }
 }
 
-module.exports = {initDBConnection}
+module.exports = { initDBConnection }
