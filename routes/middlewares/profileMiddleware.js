@@ -1,5 +1,5 @@
 const ProfileModel = require('../../models/profilesModel')
-const errorResponse = require('../helpers/errorResponse')
+const errorResponse = require('../../helpers/errorResponse')
 const { MBTI_OPTIONS, ENNEAGRAM_OPTIONS } = require('../../constants/personality')
 
 function profileExists (options = {}) {
@@ -17,6 +17,7 @@ function profileExists (options = {}) {
         httpCode: 404,
         message: 'Please use existing profile id'
       }, req, res, next)
+      return
     }
 
     next()
@@ -42,6 +43,7 @@ function profileValidation () {
         httpCode: 422,
         message: 'Please fill in profile name'
       }, req, res, next)
+      return
     }
 
     // mbti field is mandatory
@@ -50,6 +52,7 @@ function profileValidation () {
         httpCode: 422,
         message: 'Please fill in mbti'
       }, req, res, next)
+      return
     } else {
       // test mbti value
       if (!MBTI_OPTIONS.includes(mbti)) {
@@ -57,6 +60,7 @@ function profileValidation () {
           httpCode: 422,
           message: 'Please fill in valid mbti value'
         }, req, res, next)
+        return
       }
     }
 
@@ -66,6 +70,7 @@ function profileValidation () {
         httpCode: 422,
         message: 'Please fill in enneagram'
       }, req, res, next)
+      return
     } else {
       // test enneagram value
       if (!ENNEAGRAM_OPTIONS.includes(enneagram)) {
@@ -73,6 +78,7 @@ function profileValidation () {
           httpCode: 422,
           message: 'Please fill in valid enneagram value'
         }, req, res, next)
+        return
       }
     }
 
@@ -82,6 +88,7 @@ function profileValidation () {
         httpCode: 422,
         message: 'Please fill in variant'
       }, req, res, next)
+      return
     }
 
     // tritype field is mandatory
@@ -90,6 +97,7 @@ function profileValidation () {
         httpCode: 422,
         message: 'Please fill in tritype'
       }, req, res, next)
+      return
     }
 
     // socionics field is mandatory
@@ -98,6 +106,7 @@ function profileValidation () {
         httpCode: 422,
         message: 'Please fill in message socionics'
       }, req, res, next)
+      return
     }
 
     // sloan field is mandatory
@@ -106,6 +115,7 @@ function profileValidation () {
         httpCode: 422,
         message: 'Please fill in message sloan'
       }, req, res, next)
+      return
     }
 
     // psyche field is mandatory
@@ -114,6 +124,7 @@ function profileValidation () {
         httpCode: 422,
         message: 'Please fill in message psyche'
       }, req, res, next)
+      return
     }
 
     next()

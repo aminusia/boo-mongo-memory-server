@@ -1,5 +1,5 @@
 const UserModel = require('../../models/usersModel')
-const errorResponse = require('../helpers/errorResponse')
+const errorResponse = require('../../helpers/errorResponse')
 
 function userExists (options = {}) {
   return async function (req, res, next) {
@@ -16,6 +16,7 @@ function userExists (options = {}) {
         httpCode: 404,
         message: 'Please use existing user id'
       }, req, res, next)
+      return
     }
 
     next()
@@ -32,6 +33,7 @@ function userValidation () {
         httpCode: 422,
         message: 'Please fill in user\'s display name'
       }, req, res, next)
+      return
     }
 
     next()

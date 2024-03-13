@@ -4,14 +4,17 @@ const { startMongoDBServer, stopMongoDBServer } = require('./helpers/mongoDBServ
 const { initDBConnection } = require('./helpers/mongoDBClient')
 const express = require('express')
 
+// preparing http service
+const app = express()
+const port = process.env.PORT || 3000
+
 async function start () {
   // start mongoDB service
   const { uri } = await startMongoDBServer()
   initDBConnection(uri)
 
-  // preparing http service
-  const app = express()
-  const port = process.env.PORT || 3000
+  app.use(express.urlencoded({ limit: '10mb', extended: true }))
+  app.use(express.json({ limit: '10mb' }))
 
   // set the view engine to ejs
   app.set('view engine', 'ejs')
@@ -36,3 +39,5 @@ async function start () {
 }
 
 start()
+
+module.exports = app

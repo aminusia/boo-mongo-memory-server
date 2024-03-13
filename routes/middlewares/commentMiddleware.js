@@ -1,5 +1,5 @@
 const CommentsModel = require('../../models/commentsModel')
-const errorResponse = require('../helpers/errorResponse')
+const errorResponse = require('../../helpers/errorResponse')
 const {
   MBTI_OPTIONS,
   ENNEAGRAM_OPTIONS,
@@ -21,6 +21,7 @@ function commentExists (options = {}) {
         httpCode: 404,
         message: 'Please use existing comment id'
       }, req, res, next)
+      return
     }
 
     next()
@@ -37,6 +38,7 @@ function commentValidation () {
         httpCode: 422,
         message: 'Please fill in user id'
       }, req, res, next)
+      return
     }
 
     // profile field is mandatory
@@ -45,6 +47,7 @@ function commentValidation () {
         httpCode: 422,
         message: 'Please fill in profile id'
       }, req, res, next)
+      return
     }
 
     // title field is mandatory
@@ -53,6 +56,7 @@ function commentValidation () {
         httpCode: 422,
         message: 'Please fill in message title'
       }, req, res, next)
+      return
     }
 
     // content field is mandatory
@@ -61,6 +65,7 @@ function commentValidation () {
         httpCode: 422,
         message: 'Please fill in message content'
       }, req, res, next)
+      return
     }
 
     if (mbti) {
@@ -70,6 +75,7 @@ function commentValidation () {
           httpCode: 422,
           message: 'Please fill in valid mbti value'
         }, req, res, next)
+        return
       }
     }
 
@@ -80,6 +86,7 @@ function commentValidation () {
           httpCode: 422,
           message: 'Please fill in valid enneagram value'
         }, req, res, next)
+        return
       }
     }
 
@@ -90,6 +97,7 @@ function commentValidation () {
           httpCode: 422,
           message: 'Please fill in valid zodiac value'
         }, req, res, next)
+        return
       }
     }
 

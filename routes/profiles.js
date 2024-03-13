@@ -10,9 +10,10 @@ module.exports = function () {
   router.get('/:id',
     profileExists(),
     async function (req, res, next) {
-      const profiles = await ProfileModel.find({}).limit(1)
+      const _id = req.params.id
+      const profile = await ProfileModel.findOne({ _id })
       res.render('profile_template', {
-        profile: profiles[0]
+        profile
       })
     })
 
